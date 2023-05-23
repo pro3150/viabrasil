@@ -28,6 +28,17 @@ header, footer {
     text-align: center;
 }
 
+header {
+    background-color: var(--color-font-secondary);
+    padding: 1.6rem;
+}
+
+footer {
+    background-color: var(--color-background-secondary);
+    padding: 1.6rem;
+    align-items: center;
+}
+
 body,
 input,
 button,
