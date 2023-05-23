@@ -56,6 +56,10 @@ footer {
     padding: 1.6rem;
 }
 
+footer img {
+    width: 25%;
+}
+
 body,
 input,
 button,
