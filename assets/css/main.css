@@ -1,5 +1,10 @@
 :root {
-    --color-background: #f0f0f7;
+    --color-background: #F1FFFA;
+    --color-background-secondary: #E2DE84;
+    --color-font-primary: #464E47;
+    --color-font-secondary: #568259;
+    --color-font-light: #F1FFFA;
+    --color-aux: #96E6B3;
     font-size: 60%; /* controle das medidas rem */
 }
 
@@ -16,20 +21,50 @@ html, body {
 body {
     background-color: var(--color-background);
     font-size: 100%;
-    align-items: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+header {
+    background-color: var(--color-font-secondary);
+}
+
+header a {
+    color: var(--color-font-light);
+    text-decoration: none;
+    font-size: 2.4rem;
+}
+
+header img {
+    width: 15%;
+}
+
+header nav a {
+    padding: 1.6rem;
+}
+
+footer {
+    background-color: var(--color-background-secondary);
+    padding: 1.6rem;
 }
 
 body,
 input,
 button,
+footer
 textarea {
     /* font: 500 1.6rem Poppins; */
     font-weight: 500;
     font-size: 1.6rem;
-    font-family: Poppins;
-    color: var(--color-text-base)
+    color: var(--color-font-primary)
 }
 
 #container {
