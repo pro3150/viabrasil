@@ -1,0 +1,13 @@
+{
+  "name": "viabrasil",
+  "version": "1.0.0",
+  "description": "Project built as requested by PRO3150 subject",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test",
+    "lint": "eslint ."
+  },
+  "author": "Lauro Cesar, Olavo Pascoal, Philip Cohn",
+  "license": "ISC"
+}
