@@ -1,0 +1,89 @@
+:root {
+    --color-background: #F1FFFA;
+    --color-background-secondary: #E2DE84;
+    --color-font-primary: #464E47;
+    --color-font-secondary: #568259;
+    --color-font-light: #F1FFFA;
+    --color-aux: #96E6B3;
+    font-size: 60%; /* controle das medidas rem */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+}
+
+body {
+    background-color: var(--color-background);
+    font-size: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+header {
+    background-color: var(--color-font-secondary);
+}
+
+header a {
+    color: var(--color-font-light);
+    text-decoration: none;
+    font-size: 2.4rem;
+}
+
+header img {
+    width: 15%;
+}
+
+header nav a {
+    padding: 1.6rem;
+}
+
+footer {
+    background-color: var(--color-background-secondary);
+    padding: 0.8rem;
+}
+
+footer img {
+    width: 1.6rem;
+}
+
+body,
+input,
+button,
+footer
+textarea {
+    /* font: 500 1.6rem Poppins; */
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: var(--color-font-primary)
+}
+
+#container {
+    width: 90vw;    
+    max-width: 700px;
+}
+
+@media (min-width: 700px) {
+    :root {
+        font-size: 62.5%;
+    }
+}
+
+@media (max-width: 699px) {
+    :root {
+        font-size: 40%;
+    }
+}
