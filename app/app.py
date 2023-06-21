@@ -8,12 +8,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-<<<<<<< HEAD
-
-@app.route('/estoque')
-def estoque():
-    return render_template('stock.html')
-=======
 @app.route('/index.html')
 def inicio():
     return render_template('index.html')
@@ -44,4 +38,3 @@ def stock():
 
    else:
       pass # Pass is a Python way to say 'do nothing'
->>>>>>> 032dd16f6c7eec6ed865a85c1c530f4a3819ff20
