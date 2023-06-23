@@ -20,11 +20,11 @@ setup_db(app, db)
 def index():
     return render_template('index.html')
 
-@app.route('/index.html')
+@app.route('/index')
 def inicio():
     return render_template('index.html')
 
-@app.route('/stats.html')
+@app.route('/stats')
 def stats():
    # Ensure the user reached path via GET
    if request.method == "GET":
@@ -32,6 +32,17 @@ def stats():
 
    else:
       pass # Pass is a Python way to say 'do nothing'
+
+
+@app.route('/checklist')
+def checklist():
+   # Ensure the user reached path via GET
+   if request.method == "GET":
+      return render_template("stats.html")
+
+   else:
+      pass # Pass is a Python way to say 'do nothing'
+
 
 @app.route('/operations.html')
 def operations():
@@ -46,14 +57,14 @@ def operations():
 def stock():
    # Ensure the user reached path via GET
    if request.method == "GET":
-      db.get_or_404(Cars, 1)
-      return render_template("stock.html")
+      cars = Cars.query.all()
+      return render_template("stock.html", cars=cars)
 
    else:
       pass # Pass is a Python way to say 'do nothing'
 
 
-@app.route('/cars/add', methods=['GET'])
+@app.route('/cars', methods=['GET'])
 def cars():
    # Ensure the user reached path via GET
    if request.method == "GET":
@@ -66,7 +77,44 @@ def cars():
       print(cars[0].plate)
       # cars = db.get_or_404(Cars, 1)
       # print(cars[0])
-      return render_template("stock.html")
+      return render_template("stock.html", cars=cars)
 
    else:
       pass # Pass is a Python way to say 'do nothing'
+
+
+@app.route('/cars/create', methods=['GET', 'POST'])
+def cars_create():
+   # Ensure the user reached path via GET
+   if request.method == "GET":
+      return render_template("stock_create.html")
+   else:
+      form = request.form
+      return form
+      # car = Cars(
+      #    plate = form['plate'],
+      #    brand = form['brand'],
+      #    model = form['model'],
+      #    manufacture_year = form['manufacture_year'],
+      #    buy_price = form['buy_price'],
+      #    sell_price = form['sell_price'],
+      #    status = form['status'],
+      # )
+      # db.session.add(car)
+      # db.session.commit()
+      # return "ok!"
+
+@app.route('/cars/update/<id>', methods=['GET', 'POST'])
+def cars_update(id):
+   if request.method == "GET":
+      return render_template("stock_update.html", id=id)
+   else:
+      form = request.form
+      car = Cars.query.filter_by(id=id).first()
+      car.plate = form['plate']
+      car.brand = form['brand']
+      car.model = form['model']
+      car.manufacture_year = form['manufacture_year']
+      db.session.commit()
+      return render_template("stock_update_success.html")
+

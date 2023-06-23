@@ -16,8 +16,8 @@ class Users(db.Model):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-    created_at = Column(String)
-    updated_at = Column(String)
+    created_at = Column(String, server_default=db.func.now())
+    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class Cars(db.Model):
@@ -31,9 +31,18 @@ class Cars(db.Model):
     buy_price = Column(String)
     sell_price = Column(String)
     status = Column(String)
-    created_at = Column(String)
-    updated_at = Column(String)
+    created_at = Column(String, server_default=db.func.now())
+    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
     salesman_id = Column(Integer)
+
+
+class Img(db.Model):
+    id = Column(Integer, primary_key=True)
+    image = Column(String)
+    name = Column(String)
+    mimetype = Column(String)
+    created_at = Column(String, server_default=db.func.now())
+    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class Stock(db.Model):
@@ -41,14 +50,14 @@ class Stock(db.Model):
     id = Column(Integer, primary_key=True)
     stock_moviment_id = Column(Integer)
     car_id = Column(Integer)
-    inserted_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(String, server_default=db.func.now())
+    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class StockMoviment(db.Model):
 
     id = Column(Integer, primary_key=True)
     text = Column(Integer)
-    inserted_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(String, server_default=db.func.now())
+    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
 

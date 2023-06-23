@@ -14,10 +14,9 @@
     <header>
         <img src="/static/img/logo_ViaBrasil.png" alt="Logo Via Brasil">
         <nav>
-            <a href="operations.html">Operações</a>
-            <a href="stock.html">Estoque</a>
-            <a href="checklist.html">Checklist</a>
-            <a href="stats.html">Estatísticas</a>
+            <a href="{{ url_for('stock') }}">Estoque</a>
+            <a href="{{ url_for('checklist') }}">Checklist</a>
+            <a href="{{ url_for('stats') }}">Estatísticas</a>
         </nav>
     </header>
     <main>
@@ -51,12 +50,12 @@
     <footer>
         <div>
             <p>Via Brasil Automóveis LTDA.</p>
-            <p>Av. Dr. Vital Brasil, 777Butantã - São Paulo/SP</p>
+            <p>Av. Dr. Vital Brasil, 777</p>
+            <p>Butantã - São Paulo/SP</p>
         </div>
         <div>
             <img src="/static/img/icon_telefone.png" alt="">
             <p>11 3722-3434</p>
-            <p>11 3722-5030</p>
         </div>
         <div>
             <img src="/static/img/icon_wpp.png" alt="">

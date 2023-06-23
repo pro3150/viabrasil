@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque</title>
-    <link rel="stylesheet" href="/static/css/stock.css">
+    <link rel="stylesheet" href="/static/css/stock_create.css">
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
@@ -20,36 +20,26 @@
         </nav>
     </header>
     <main>
-        <div class="create-car">
-            <a href="cars/create">Cadastro no estoque</a>
-        </div>
-        {% if cars|length > 0 %}
-            {% for car in cars %}
-                <div class="car">
-                    <img src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-4.jpeg?isig=0&q=75" alt="">
-                    <div class="wrap-car">
-                        <div class="car-content">
-                            <small>{{car["plate"]}}</small>
-                            <p>{{car["brand"]}}</p>
-                            <h3>{{car["model"]}}</h3>
-                            <small>{{car["manufacture_year"]}}</small>
-                            <p>{{car["status"]}}</p>
-                            <p>{{car["buy_price"]}}</p>
-                        </div>
-                        <div class="car-options">
-                            <a href="cars/update/{{car['id']}}">Editar</a>
-                            <a href="cars/delete/{{car['id']}}">Excluir</a>
-                        </div>
-                    </div>
-                    
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Não há carros no estoque</p>
-        {% endif %}
+        <form action="{{url_for('cars_create')}}" method="POST" >
+            <label for="image">URL da Imagem</label>
+            <input type="file" name="image" id="image" accept="image/*">
+            <label for="plate">Placa</label>
+            <input type="text" name="plate" id="plate">
+            <label for="brand">Marca</label>
+            <input type="text" name="brand" id="brand">
+            <label for="model">Modelo</label>
+            <input type="text" name="model" id="model">
+            <label for="manufacture_year">Ano de fabricação</label>
+            <input type="text" name="manufacture_year" id="manufacture_year">
+            <label for="buy_price">Preço de compra</label>
+            <input type="text" name="buy_price" id="buy_price">
+            <label for="sell_price">Preço de venda</label>
+            <input type="text" name="sell_price" id="sell_price">
+            <label for="status">Status</label>
+            <input type="text" name="status" id="status" value="in_stock" readonly>
+            <input type="submit" value="Cadastrar">
+        </form>
     </main>
-    
-
     <footer>
         <div>
             <p>Via Brasil Automóveis LTDA.</p>
