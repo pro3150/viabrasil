@@ -1,8 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-from models import db, Users, Cars, Stock, StockMoviment, setup_db
+from models import (
+    db,
+    setup_db,
+    Users,
+    Cars, 
+    Stock,
+    StockMoviment,
+    Img,
+    Checklist,
+    ChecklistItem,
+    ChecklistTemplate,
+    ChecklistTemplateItem,
+)
 import os
+
 
 load_dotenv()
 DB_HOST = os.getenv("DB_HOST")

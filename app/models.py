@@ -1,9 +1,11 @@
 import os
 from sqlalchemy import Column, Integer, String, DateTime
 from flask_sqlalchemy import SQLAlchemy
+from models.checklists import Checklist, ChecklistItem, ChecklistTemplate, ChecklistTemplateItem
 
 
 db = SQLAlchemy()
+
 
 def setup_db(app, db):
     with app.app_context():
