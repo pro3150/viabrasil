@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from models import db
+from models.setup import db
 
 
 class Checklist(db.Model):
-    id = db.Column(Integer, primary_key=True, autoincrement=True, foreign_key=True)
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
     checklist_template_id = db.Column(Integer, db.ForeignKey('checklist_template.id'))
     status = db.Column(String)
     car_id = db.Column(Integer)

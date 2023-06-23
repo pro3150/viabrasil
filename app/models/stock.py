@@ -1,31 +1,11 @@
-import os
-from sqlalchemy import Column, Integer, String, DateTime
-from flask_sqlalchemy import SQLAlchemy
-from models.checklists import Checklist, ChecklistItem, ChecklistTemplate, ChecklistTemplateItem
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from models.setup import db
 
 
-db = SQLAlchemy()
-
-
-def setup_db(app, db):
-    with app.app_context():
-        db.create_all()
-
-
-class Users(db.Model):
+class Car(db.Model):
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    email = Column(String)
-    password = Column(String)
-    created_at = Column(DateTime, server_default=db.func.now())
-    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
-
-
-class Cars(db.Model):
-
-    id = Column(Integer, primary_key=True)
-    image_url = db.relationship('Img', backref='cars', lazy=True)
+    image_id = Column(Integer, db.ForeignKey('image.id'))
     plate = Column(String)
     brand = Column(String)
     model = Column(String)
@@ -38,14 +18,14 @@ class Cars(db.Model):
     salesman_id = Column(Integer)
 
 
-class Img(db.Model):
+class Image(db.Model):
     id = Column(Integer, primary_key=True)
     image = Column(String)
     name = Column(String)
     mimetype = Column(String)
-    car_id = Column(Integer, db.ForeignKey('cars.id'), nullable=False)
     created_at = Column(DateTime, server_default=db.func.now())
     updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+    cars = db.relationship('Car', backref='image', lazy=True)
 
 
 class Stock(db.Model):
@@ -63,4 +43,3 @@ class StockMoviment(db.Model):
     text = Column(Integer)
     created_at = Column(DateTime, server_default=db.func.now())
     updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
-

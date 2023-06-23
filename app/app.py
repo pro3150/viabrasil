@@ -1,18 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-from models import (
+from models.setup import (
     db,
     setup_db,
     Users,
-    Cars, 
-    Stock,
-    StockMoviment,
-    Img,
+)
+from models.checklists import (
     Checklist,
     ChecklistItem,
     ChecklistTemplate,
     ChecklistTemplateItem,
+)
+from models.stock import (
+    Car,
+    Image,
+    Stock,
+    StockMoviment
 )
 import os
 
@@ -66,7 +70,7 @@ def checklist():
 def stock():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        cars = Cars.query.all()
+        cars = Car.query.all()
         return render_template("stock.html", cars=cars)
 
     else:
@@ -77,14 +81,14 @@ def stock():
 def cars():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        # car = Cars(
+        # car = Car(
         #    id = "1"
         # )
         # db.session.add(car)
         # db.session.commit()
-        cars = Cars.query.all()
+        cars = Car.query.all()
         print(cars[0].plate)
-        # cars = db.get_or_404(Cars, 1)
+        # cars = db.get_or_404(Car, 1)
         # print(cars[0])
         return render_template("stock.html", cars=cars)
 
@@ -100,7 +104,7 @@ def cars_create():
     else:
         form = request.form
 
-        car = Cars(
+        car = Car(
             plate=form["plate"],
             brand=form["brand"],
             model=form["model"],
@@ -122,7 +126,7 @@ def cars_update(id):
         return render_template("stock_update.html", id=id)
     else:
         form = request.form
-        car = Cars.query.filter_by(id=id).first()
+        car = Car.query.filter_by(id=id).first()
         car.plate = form["plate"]
         car.brand = form["brand"]
         car.model = form["model"]
@@ -134,10 +138,10 @@ def cars_update(id):
 @app.route("/cars/delete/<id>", methods=["GET", "POST"])
 def cars_delete(id):
     if request.method == "GET":
-        car = Cars.query.filter_by(id=id).first()
+        car = Car.query.filter_by(id=id).first()
         return render_template("stock_delete.html", car=car)
     else:
-        car = Cars.query.filter_by(id=id).first()
+        car = Car.query.filter_by(id=id).first()
         db.session.delete(car)
         db.session.commit()
         return redirect(url_for("stock_operation", crud_message="car-delete"))
