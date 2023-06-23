@@ -4,21 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque</title>
+    <title>Via Brasil | Estoque</title>
     <link rel="stylesheet" href="/static/css/stock.css">
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    <header>
-        <img src="/static/img/logo_ViaBrasil.png" alt="Logo Via Brasil">
-        <nav>
-            <a href="operations.html">Operações</a>
-            <a href="stock.html">Estoque</a>
-            <a href="checklist.html">Checklist</a>
-            <a href="stats.html">Estatísticas</a>
-            <a href="index.html">Início</a>
-        </nav>
-    </header>
+    {% include 'header.html' %}
+
     <main>
         <div class="create-car">
             <a href="cars/create">Cadastro no estoque</a>
@@ -49,26 +41,6 @@
         {% endif %}
     </main>
     
-
-    <footer>
-        <div>
-            <p>Via Brasil Automóveis LTDA.</p>
-            <p>Av. Dr. Vital Brasil, 777</p>
-            <p>Butantã - São Paulo/SP</p>
-        </div>
-        <div>
-            <img src="/static/img/icon_telefone.png" alt="">
-            <p>11 3722-3434</p>
-            <p>11 3722-5030</p>
-        </div>
-        <div>
-            <img src="/static/img/icon_wpp.png" alt="">
-            <p>11 94781-6185</p>
-        </div>
-        <div>
-            <img src="/static/img/icon_email.png" alt="">
-            <p>contato@viabrasilautomoveis.com.br</p>
-        </div>
-    </footer>
+    {% include 'footer.html' %}
 </body>
 </html>

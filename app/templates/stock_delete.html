@@ -12,7 +12,14 @@
     {% include 'header.html' %}
 
     <main>
-        <form action="{{ url_for('cars_update', id=id) }}" method="POST" >
+        <p>Tem certeza que deseja deletar o seguinte veículo do estoque?</p>
+        <p>{{car.plate}}</p>
+        <p>{{car.brand}}</p>
+        <p>{{car.model}}</p>
+        <form action="{{url_for('cars_delete', id=car.id)}}" method="POST">
+            <input type="submit" value="Remover">
+        </form>
+        <!-- <form action="{{ url_for('cars_update', id=id) }}" method="POST" >
             <label for="image-url">Imagem</label>
             <input type="text" name="image-url" id="image-url">
             <label for="plate">Placa</label>
@@ -24,7 +31,7 @@
             <label for="manufacture_year">Ano de fabricação</label>
             <input type="text" name="manufacture_year" id="manufacture_year">
             <input type="submit" value="Editar">
-        </form>
+        </form> -->
     </main>
     
     {% include 'footer.html' %}

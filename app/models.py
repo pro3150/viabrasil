@@ -16,14 +16,14 @@ class Users(db.Model):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-    created_at = Column(String, server_default=db.func.now())
-    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
+    created_at = Column(DateTime, server_default=db.func.now())
+    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class Cars(db.Model):
 
     id = Column(Integer, primary_key=True)
-    image_url = Column(String)
+    image_url = db.relationship('Img', backref='cars', lazy=True)
     plate = Column(String)
     brand = Column(String)
     model = Column(String)
@@ -31,8 +31,8 @@ class Cars(db.Model):
     buy_price = Column(String)
     sell_price = Column(String)
     status = Column(String)
-    created_at = Column(String, server_default=db.func.now())
-    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
+    created_at = Column(DateTime, server_default=db.func.now())
+    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     salesman_id = Column(Integer)
 
 
@@ -41,8 +41,9 @@ class Img(db.Model):
     image = Column(String)
     name = Column(String)
     mimetype = Column(String)
-    created_at = Column(String, server_default=db.func.now())
-    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
+    car_id = Column(Integer, db.ForeignKey('cars.id'), nullable=False)
+    created_at = Column(DateTime, server_default=db.func.now())
+    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class Stock(db.Model):
@@ -50,14 +51,14 @@ class Stock(db.Model):
     id = Column(Integer, primary_key=True)
     stock_moviment_id = Column(Integer)
     car_id = Column(Integer)
-    created_at = Column(String, server_default=db.func.now())
-    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
+    created_at = Column(DateTime, server_default=db.func.now())
+    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 class StockMoviment(db.Model):
 
     id = Column(Integer, primary_key=True)
     text = Column(Integer)
-    created_at = Column(String, server_default=db.func.now())
-    updated_at = Column(String, server_default=db.func.now(), server_onupdate=db.func.now())
+    created_at = Column(DateTime, server_default=db.func.now())
+    updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
