@@ -40,6 +40,8 @@ main {
 .car img {
     border-radius: 2rem;
     margin-left: 0;
+    width: 24rem;
+    height: 18rem;
 }
 
 .wrap-car {
@@ -61,3 +63,7 @@ main {
 a+a {
     margin-left: 10px;
   }
+
+code {
+    background-color: aliceblue;
+}

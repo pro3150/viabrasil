@@ -11,7 +11,7 @@
 <body>
     {% include 'header.html' %}
     <main>
-        <form action="{{url_for('cars_create')}}" method="POST" >
+        <form action="{{url_for('cars_create')}}" method="POST" enctype="multipart/form-data" >
             <label for="image">URL da Imagem</label>
             <input type="file" name="image" id="image" accept="image/*">
             <label for="plate">Placa</label>

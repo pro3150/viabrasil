@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from models.setup import (
@@ -12,12 +12,8 @@ from models.checklists import (
     ChecklistTemplate,
     ChecklistTemplateItem,
 )
-from models.stock import (
-    Car,
-    Image,
-    Stock,
-    StockMoviment
-)
+from models.stock import Car, Image, Stock, StockMoviment
+from werkzeug.utils import secure_filename
 import os
 
 
@@ -29,9 +25,13 @@ DB_USER = os.getenv("DB_USERNAME")
 DB_PASS = os.getenv("DB_PASS")
 
 app = Flask(__name__)
+
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+UPLOAD_FOLDER = "static/img_uploads/"
+app.config["UPLOAD_FOLDER"] = os.path.join(os.getcwd(), UPLOAD_FOLDER)
+
 db.init_app(app)
 setup_db(app, db)
 
@@ -71,6 +71,13 @@ def stock():
     # Ensure the user reached path via GET
     if request.method == "GET":
         cars = Car.query.all()
+        #from base64 import b64encode
+
+        # imgs = []
+        # for car_pos in range(0, len(cars)):
+        #     cars[car_pos].image.image = b64encode(
+        #         bytes(cars[car_pos].image.image, encoding="utf8")
+        #     ).decode("utf-8")
         return render_template("stock.html", cars=cars)
 
     else:
@@ -90,7 +97,7 @@ def cars():
         print(cars[0].plate)
         # cars = db.get_or_404(Car, 1)
         # print(cars[0])
-        return render_template("stock.html", cars=cars)
+        return cars[0].plate#render_template("stock.html", cars=cars)
 
     else:
         pass  # Pass is a Python way to say 'do nothing'
@@ -104,7 +111,21 @@ def cars_create():
     else:
         form = request.form
 
+        image_file = request.files["image"]
+        image_filename = secure_filename(image_file.filename)
+        image_mimetype = image_file.mimetype
+
+        image_path = os.path.join(UPLOAD_FOLDER, image_filename)
+        image_file.save(image_path)
+
+        image = Image(
+            image=image_path,
+            name=image_filename,
+            mimetype=image_mimetype,
+        )
+
         car = Car(
+            image=image,
             plate=form["plate"],
             brand=form["brand"],
             model=form["model"],
@@ -114,10 +135,10 @@ def cars_create():
             status=form["status"],
         )
 
-        db.session.add(car)
+        db.session.add_all([image, car])
         db.session.commit()
 
-        return render_template("stock_crud_success.html", crud="car-create")
+        return redirect(url_for("stock"))
 
 
 @app.route("/cars/update/<id>", methods=["GET", "POST"])
@@ -142,7 +163,9 @@ def cars_delete(id):
         return render_template("stock_delete.html", car=car)
     else:
         car = Car.query.filter_by(id=id).first()
+        car_image = Image.query.filter_by(id=car.image_id).first()
         db.session.delete(car)
+        db.session.delete(car_image)
         db.session.commit()
         return redirect(url_for("stock_operation", crud_message="car-delete"))
 

@@ -18,15 +18,17 @@
         {% if cars|length > 0 %}
             {% for car in cars %}
                 <div class="car">
-                    <img src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-4.jpeg?isig=0&q=75" alt="">
+                    <img src="{{car.image.image}}" alt="">
                     <div class="wrap-car">
                         <div class="car-content">
                             <small>{{car["plate"]}}</small>
                             <p>{{car["brand"]}}</p>
                             <h3>{{car["model"]}}</h3>
                             <small>{{car["manufacture_year"]}}</small>
-                            <p>{{car["status"]}}</p>
-                            <p>{{car["buy_price"]}}</p>
+                            <br>
+                            <small>Status: </small>
+                            <code>{{car["status"]}}</code>
+                            <p>R${{car["buy_price"]}},00</p>
                         </div>
                         <div class="car-options">
                             <a href="cars/update/{{car['id']}}">Editar</a>
