@@ -3,17 +3,36 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+header {
+    padding-bottom: 3rem;
+}
+
+.stock {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 10rem;
+    margin-left: 10rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .create-car {
-    margin-left: 0;
     background-color: var(--color-font-secondary);
     border-radius: 2rem;
     height: 5rem;
     display: flex;
     justify-content: center;
-    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    align-items: center;
+    width: 25rem;
+    margin: 2rem;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
 }
 
 .create-car:hover {
@@ -34,6 +53,8 @@ main {
     background-color: var(--color-background-secondary);
     width: 80rem;
     height: 18rem;
+    margin: 2rem;
+
     /* margin: 0 20rem 0 20rem; */
 }
 

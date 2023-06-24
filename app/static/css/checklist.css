@@ -1,0 +1,44 @@
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.checklists {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 10rem;
+    margin-left: 10rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80rem;
+}
+
+.create-checklist {
+    background-color: var(--color-font-secondary);
+    border-radius: 2rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25rem;
+    margin: 2rem;
+    box: 0 0 10px 4px rgba(0,0,0,0.2);
+}
+
+.create-checklist:hover {
+    background-color: var(--color-font-primary);
+    color: var(--color-font-light);
+}
+
+.create-checklist a {
+    color: var(--color-font-light);
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 1.6rem;
+}

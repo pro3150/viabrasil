@@ -60,47 +60,69 @@ def stats():
 def checklist():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        return render_template("checklist.html")
-
+        checklist_items = ChecklistItem.query.all()
+        return render_template("checklist.html", checklist_items=checklist_items)
     else:
-        pass  # Pass is a Python way to say 'do nothing'
+        pass
+
+
+@app.route("/checklist/create")
+def checklist_create():
+    # Ensure the user reached path via GET
+    if request.method == "GET":
+        checklist_items = ChecklistItem.query.all()
+        return render_template("checklist.html", checklist_items=checklist_items)
+    else:
+        pass
+
+
+@app.route("/checklist/template/create", methods=["GET", "POST"])
+def checklist_template_create():
+    if request.method == "GET":
+        return render_template("checklist_template_create.html")
+    else:
+        form = request.form
+
+        checklist_template = ChecklistTemplate(
+            title=form["checklist_template_title"],
+        )
+        db.session.add(checklist_template)
+
+        checklist_template_items_input = form.getlist("checklist_template_item")
+        checklist_template_items_order_input = form.getlist(
+            "checklist_template_item_order"
+        )
+
+        for item_input, item_order in zip(
+            checklist_template_items_input, checklist_template_items_order_input
+        ):
+            checklist_template_item = ChecklistTemplateItem(
+                checklist_template=checklist_template,
+                text=item_input,
+                order=item_order,
+            )
+            db.session.add(checklist_template_item)
+        
+        db.session.commit()
+
+        return redirect(url_for("checklist_create"))
+
+
+@app.route("/checklist/template/edit/<id>")
+def checklist_template_edit(id):
+    checklist_template_items = ChecklistTemplateItem.query.filter_by(
+        ChecklistTemplateItem.checklist_template_id == id
+    ).all()
+    return checklist_template_items
 
 
 @app.route("/stock")
 def stock():
-    # Ensure the user reached path via GET
     if request.method == "GET":
         cars = Car.query.all()
-        #from base64 import b64encode
-
-        # imgs = []
-        # for car_pos in range(0, len(cars)):
-        #     cars[car_pos].image.image = b64encode(
-        #         bytes(cars[car_pos].image.image, encoding="utf8")
-        #     ).decode("utf-8")
         return render_template("stock.html", cars=cars)
-
     else:
-        pass  # Pass is a Python way to say 'do nothing'
-
-
-@app.route("/cars", methods=["GET"])
-def cars():
-    # Ensure the user reached path via GET
-    if request.method == "GET":
-        # car = Car(
-        #    id = "1"
-        # )
-        # db.session.add(car)
-        # db.session.commit()
-        cars = Car.query.all()
-        print(cars[0].plate)
-        # cars = db.get_or_404(Car, 1)
-        # print(cars[0])
-        return cars[0].plate#render_template("stock.html", cars=cars)
-
-    else:
-        pass  # Pass is a Python way to say 'do nothing'
+        pass
 
 
 @app.route("/cars/create", methods=["GET", "POST"])

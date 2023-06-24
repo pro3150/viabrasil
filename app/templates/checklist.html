@@ -6,14 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Via Brasil | Checklist</title>
-    <link rel="stylesheet" href="/static/css/stats.css">
+    <link rel="stylesheet" href="/static/css/checklist.css">
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 
 <body>
     {% include 'header.html' %}
     <main>
-        <p>XGH ainda falta preencher.</p>
+        <div class="checklists">
+            <div class="create-checklist">
+                <a href="{{url_for('checklist_template_create')}}">Criar item</a>
+            </div>
+            {% if checklist_items|length > 0 %}
+                {% for checklist_item in checklist_items %}
+                    <div class="checklist-item">
+                        <div class="checklist-item-content">
+                            <h3>{{checklist_item["name"]}}</h3>
+                            <p>{{checklist_item["description"]}}</p>
+                        </div>
+                        <div class="checklist-item-options">
+                            <a href="checklist/update/{{checklist_item['id']}}">Editar</a>
+                            <a href="checklist/delete/{{checklist_item['id']}}">Excluir</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Não há itens no checklist</p>
+            {% endif %}
+        </div>
     </main>
     {% include 'footer.html' %}
 </body>

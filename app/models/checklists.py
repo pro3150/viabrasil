@@ -27,11 +27,12 @@ class ChecklistTemplate(db.Model):
     created_at = db.Column(DateTime, server_default=db.func.now())
     updated_at = db.Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     checklists = db.relationship('Checklist', backref='checklist_template')
+    checklist_template_items = db.relationship('ChecklistTemplateItem', backref='checklist_template')
 
 
 class ChecklistTemplateItem(db.Model):
     id = db.Column(Integer, primary_key=True)
-    checklist_template_id = db.Column(Integer)
+    checklist_template_id = db.Column(Integer, db.ForeignKey('checklist_template.id'))
     text = db.Column(String)
     order = db.Column(Integer)
     created_at = db.Column(DateTime, server_default=db.func.now())

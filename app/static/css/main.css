@@ -1,10 +1,11 @@
 :root {
-    --color-background: #F1FFFA;
+    --color-background: #FFFFFF;
     --color-background-secondary: #E2DE84;
     --color-font-primary: #464E47;
     --color-font-secondary: #568259;
     --color-font-light: #F1FFFA;
     --color-aux: #96E6B3;
+    --color-background-light: #E6E6F0;
     font-size: 60%; /* controle das medidas rem */
 }
 
@@ -19,7 +20,7 @@ html, body {
 }
 
 body {
-    background-color: var(--color-background);
+    background-color: var(--color-background-light);
     font-size: 100%;
     display: flex;
     flex-direction: column;

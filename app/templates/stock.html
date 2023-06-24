@@ -12,35 +12,38 @@
     {% include 'header.html' %}
 
     <main>
-        <div class="create-car">
-            <a href="cars/create">Cadastro no estoque</a>
-        </div>
-        {% if cars|length > 0 %}
-            {% for car in cars %}
-                <div class="car">
-                    <img src="{{car.image.image}}" alt="">
-                    <div class="wrap-car">
-                        <div class="car-content">
-                            <small>{{car["plate"]}}</small>
-                            <p>{{car["brand"]}}</p>
-                            <h3>{{car["model"]}}</h3>
-                            <small>{{car["manufacture_year"]}}</small>
-                            <br>
-                            <small>Status: </small>
-                            <code>{{car["status"]}}</code>
-                            <p>R${{car["buy_price"]}},00</p>
+        <div class="stock">
+            <div class="create-car">
+                <a href="cars/create">Cadastro no estoque</a>
+            </div>
+            {% if cars|length > 0 %}
+                {% for car in cars %}
+                    <div class="car">
+                        <img src="{{car.image.image}}" alt="">
+                        <div class="wrap-car">
+                            <div class="car-content">
+                                <small>{{car["plate"]}}</small>
+                                <p>{{car["brand"]}}</p>
+                                <h3>{{car["model"]}}</h3>
+                                <small>{{car["manufacture_year"]}}</small>
+                                <br>
+                                <small>Status: </small>
+                                <code>{{car["status"]}}</code>
+                                <p>R${{car["buy_price"]}},00</p>
+                            </div>
+                            <div class="car-options">
+                                <a href="cars/update/{{car['id']}}">Editar</a>
+                                <a href="cars/delete/{{car['id']}}">Excluir</a>
+                            </div>
                         </div>
-                        <div class="car-options">
-                            <a href="cars/update/{{car['id']}}">Editar</a>
-                            <a href="cars/delete/{{car['id']}}">Excluir</a>
-                        </div>
+                        
                     </div>
-                    
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Não há carros no estoque</p>
-        {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Não há carros no estoque</p>
+            {% endif %}
+        </div>
+        
     </main>
     
     {% include 'footer.html' %}
