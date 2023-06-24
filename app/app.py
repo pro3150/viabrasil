@@ -70,8 +70,8 @@ def checklist():
 def checklist_create():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        checklist_items = ChecklistItem.query.all()
-        return render_template("checklist.html", checklist_items=checklist_items)
+        checklist_templates = ChecklistTemplate.query.all()
+        return render_template("checklist_create.html", checklist_templates=checklist_templates)
     else:
         pass
 
