@@ -16,6 +16,7 @@ class Car(db.Model):
     created_at = Column(DateTime, server_default=db.func.now())
     updated_at = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     salesman_id = Column(Integer)
+    checklists = db.relationship('Checklist', backref='car')
 
 
 class Image(db.Model):

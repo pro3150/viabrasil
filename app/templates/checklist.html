@@ -17,14 +17,39 @@
             <div class="create-checklist">
                 <a href="{{url_for('checklist_create')}}">Criar checklist</a>
             </div>
-            {% if checklist_items|length > 0 %}
-                {% for checklist_item in checklist_items %}
-                    <div class="checklist-item">
-                        <div class="checklist-item-content">
-                            <h3>{{checklist_item["status"]}}</h3>
-                            <p>{{checklist_item["description"]}}</p>
+            {% if checklists|length > 0 %}
+                {% for checklist in checklists %}
+                <div class="checklist">
+                    <div class="car">
+                        <img src="{{checklist.car.image.image}}" alt="">
+                        <div class="wrap-car">
+                            <div class="car-content">
+                                <small>{{checklist.car["plate"]}}</small>
+                                <p>{{checklist.car["brand"]}}</p>
+                                <h3>{{checklist.car["model"]}}</h3>
+                                <small>{{checklist.car["manufacture_year"]}}</small>
+                                <br>
+                                <small>Status: </small>
+                                <code>{{checklist.car["status"]}}</code>
+                                <p>R${{checklist.car["buy_price"]}},00</p>
+                            </div>
                         </div>
                     </div>
+                    <h1>{{checklist.checklist_template.title}}</h1>
+                    {% for checklist_item in checklist.checklist_items %}
+                        <div class="checklist-item">
+                            <div class="checklist-item-content">
+                                <p>{{checklist_item.checklist_template_item.text}}</p>
+                                {% if checklist_item["status"] %}
+                                    <p>Postgresql</p>   
+                                    <img class="check_item checklist-true" src="/static/img/checklist.png" alt="Checklist">
+                                {% else %}
+                                    <img class="check_item checklist-false" src="/static/img/checklist-not-ok.png" alt="Checklist">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
                 {% endfor %}
             {% else %}
                 <p>Não há checklists criados</p>
@@ -32,6 +57,8 @@
         </div>
     </main>
     {% include 'footer.html' %}
+    <script src="/static/js/checklist.js"></script>
+
 </body>
 
 </html>

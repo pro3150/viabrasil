@@ -1,12 +1,13 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from models.setup import db
+from models.stock import Car
 
 
 class Checklist(db.Model):
     id = db.Column(Integer, primary_key=True, autoincrement=True)
     checklist_template_id = db.Column(Integer, db.ForeignKey('checklist_template.id'))
     status = db.Column(String)
-    car_id = db.Column(Integer)
+    car_id = db.Column(Integer, db.ForeignKey(Car.id))
     created_at = db.Column(DateTime, server_default=db.func.now())
     updated_at = db.Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     checklist_items = db.relationship('ChecklistItem', backref='checklist')

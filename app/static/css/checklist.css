@@ -42,3 +42,67 @@ main {
     font-size: 1.8rem;
     padding: 1.6rem;
 }
+
+.checklist {
+    border-radius: 2rem;
+    background-color: var(--color-background-secondary);
+    width: 60rem;
+    min-height: 18rem;
+    margin: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.car {
+    display: flex;
+    border-radius: 2rem;
+    background-color: var(--color-background-secondary);
+    width: 40rem;
+    height: 18rem;
+    margin: 2rem;
+
+    /* margin: 0 20rem 0 20rem; */
+}
+
+.car img {
+    border-radius: 2rem;
+    margin-left: 0;
+    width: 24rem;
+    height: 18rem;
+}
+
+.wrap-car {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 2rem;
+}
+
+.checklist-item-content {
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+    justify-content: space-between;
+    margin: 1rem;
+
+    background-color: aliceblue;
+    border-radius: 2rem;
+
+    width: 50rem;
+    height: auto;
+    min-height: 4rem;
+
+}
+
+.checklist-item-content p {
+    margin: 1rem;
+}
+
+.checklist-item-content img {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+}
+

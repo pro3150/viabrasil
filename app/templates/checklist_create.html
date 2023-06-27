@@ -14,43 +14,43 @@
 <body>
     {% include 'header.html' %}
     <main>
-        <div class="checklist_templates">
-            {% if checklist_templates|length > 0 %}
-            <form class="form-filters" action="{{url_for('checklist_create')}}">
-                <div class="filters">
-                    <select required="required" name="car" id="cars">
-                        {% for car in cars %}
-                        {% if car.id == car_filtered.id %}
-                            <option value="{{car.id}}" selected>{{car.model}} | {{car.plate}}</option>
-                        {% else %}
-                            <option value="{{car.id}}">{{car.model}} | {{car.plate}}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                    <select required="required" name="checklist_template" id="checklist_template">
-                        {% for checklist_template in checklist_templates %}
-                        {% if checklist_template.id == checklist_template_filtered.id %}
-                            <option value="{{checklist_template.id}}" selected>{{checklist_template.title}}</option>
-                        {% else %}
-                            <option value="{{checklist_template.id}}">{{checklist_template.title}}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                <input type="submit" value="Selecionar">
-            </form>
+        {% if checklist_templates|length > 0 %}
+            <div class="checklist_templates">
+                <form class="form-filters" action="{{url_for('checklist_create')}}">
+                    <div class="filters">
+                        <select required="required" name="car" id="cars">
+                            {% for car in cars %}
+                            {% if car.id == car_filtered.id %}
+                                <option value="{{car.id}}" selected>{{car.model}} | {{car.plate}}</option>
+                            {% else %}
+                                <option value="{{car.id}}">{{car.model}} | {{car.plate}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        <select required="required" name="checklist_template" id="checklist_template">
+                            {% for checklist_template in checklist_templates %}
+                            {% if checklist_template.id == checklist_template_filtered.id %}
+                                <option value="{{checklist_template.id}}" selected>{{checklist_template.title}}</option>
+                            {% else %}
+                                <option value="{{checklist_template.id}}">{{checklist_template.title}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="Selecionar">
+                </form>
 
                 {% if checklist_template_filtered %}
-                <div class="checklist_template">
-                    <div class="checklist_template_header">
-                        <img src="/{{car_filtered.image.image}}" alt="Carro">
-                        <div class="checklist_template_header_info">
-                            <h3 class="checklist_template_title">{{checklist_template_filtered["title"]}}</h3>
-                            <p>{{car_filtered["plate"]}}</p>
-                            <p>{{car_filtered["brand"]}}</p>
-                            <h3>{{car_filtered["model"]}}</h3>
-                            <p>{{car_filtered["manufacture_year"]}}</p>
-                        </div>
+                    <div class="checklist_template">
+                        <div class="checklist_template_header">
+                            <img src="/{{car_filtered.image.image}}" alt="Carro">
+                            <div class="checklist_template_header_info">
+                                <h3 class="checklist_template_title">{{checklist_template_filtered["title"]}}</h3>
+                                <p>{{car_filtered["plate"]}}</p>
+                                <p>{{car_filtered["brand"]}}</p>
+                                <h3>{{car_filtered["model"]}}</h3>
+                                <p>{{car_filtered["manufacture_year"]}}</p>
+                            </div>
                     </div>
                     <div class="checklist_template_items">
                         <ul>
@@ -67,11 +67,12 @@
                         </form>
                     </div>
                 </div>
-                {% endif %}
-                {% else %}
-        </div>
-        <p>Não há templates disponíveis para criação de checklists</p>
-        </div>
+            {% endif %}
+        {% else %}
+            </div>
+                <p>Não há templates disponíveis para criação de checklists</p>
+                <a href="{{url_for('checklist_template_create')}}">Criar template</a>
+            </div>
         {% endif %}
     </main>
     {% include 'footer.html' %}

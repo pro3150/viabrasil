@@ -82,9 +82,9 @@ def dados_frota():
 def checklist():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        checklist_items = ChecklistItem.query.all()
-        print(checklist_items)
-        return render_template("checklist.html", checklist_items=checklist_items)
+        checklists = Checklist.query.all()
+        print(checklists)
+        return render_template("checklist.html", checklists=checklists)#checklist_items=checklist_items)
     else:
         pass
 
@@ -133,16 +133,6 @@ def checklist_create():
         
         db.session.commit()
         return redirect(url_for("checklist"))
-
-
-@app.route("/checklist/create/build", methods=["POST"])
-def checklist_create_with_template(car_id, checklist_template_id):
-    # Ensure the user reached path via GET
-    if request.method == "GET":
-        #checklist_template = ChecklistTemplate.query.filter_by(id=checklist_template_id).first()
-        return car_id#render_template("checklist_create_with_template.html", checklist_template=checklist_template)
-    else:
-        pass
 
 
 @app.route("/checklist/template/create", methods=["GET", "POST"])

@@ -5,5 +5,9 @@ handlers:
     static_dir: static
   - url: /.*
     script: auto
-includes:
-  - env_variables.yaml
+env_variables:
+  DB_HOST: 35.199.66.87
+  DB_PORT: 5432
+  DB_NAME: viabrasil
+  DB_PASS: 1234
+  DB_USERNAME: postgres
