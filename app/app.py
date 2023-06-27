@@ -55,6 +55,15 @@ def stats():
     else:
         pass  # Pass is a Python way to say 'do nothing'
 
+@app.route("/stats/dados_frota")
+def dados_frota():
+    # Ensure the user reached path via GET
+    if request.method == "GET":
+        return render_template("stats_dados_frota.html")
+    else:
+        pass
+
+
 
 @app.route("/checklist")
 def checklist():

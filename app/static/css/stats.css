@@ -7,3 +7,39 @@ main {
 main img {
     width: 30%;
 }
+
+.stats {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 50rem;
+    margin-left: 50rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dados_frota {
+    background-color: var(--color-font-secondary);
+    border-radius: 2rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25rem;
+    margin: 2rem;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+}
+
+.dados_frota:hover {
+    background-color: var(--color-font-primary);
+    color: var(--color-font-light);
+}
+
+.dados_frota a {
+    color: var(--color-font-light);
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 1.6rem;
+}
