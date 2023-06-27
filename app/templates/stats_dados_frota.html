@@ -6,14 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Via Brasil | Estatísticas</title>
-    <link rel="stylesheet" href="/static/css/stats_dados_da_frota.css">
+    <link rel="stylesheet" href="/static/css/stats_dados_frota.css">
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 
 <body>
     {% include 'header.html' %}
     <main>
-
+        {% if nb_cars > 0 %}
+        <div class="stats_dados_frota_nb">
+            <p>Nossa frota conta com {{nb_cars}} carros em estoque</p>
+        </div>
+        <br>
+        <br>
+        <div class="stats_dados_frota_idade">
+            <p>Idade média dos carros em estoque: {{ano_medio}} anos</p>
+        </div>
+        <br>
+        <br>
+        <div class="stats_dados_frota_preço">
+            <p>Preço médio de compra: {{compra_medio}} reais</p>
+            <br>
+            <p>Preço médio de venda: {{venda_medio}} reais</p>
+        </div>
+            
+        {% else %}
+        <p>Não há carros no estoque</p>
+    {% endif %}
     </main>
     {% include 'footer.html' %}
 </body>

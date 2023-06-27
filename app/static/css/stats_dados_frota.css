@@ -1,0 +1,45 @@
+main {
+    margin: 3.2rem 3.2rem 3.2rem 3.2rem;
+    line-height: 1.6rem;
+    text-align: justify;
+}
+
+main img {
+    width: 30%;
+}
+
+.stats_dados_frota_nb {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 50rem;
+    margin-left: 50rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats_dados_frota_idade {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 50rem;
+    margin-left: 50rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats_dados_frota_preço {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 50rem;
+    margin-left: 50rem;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

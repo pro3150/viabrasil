@@ -59,7 +59,20 @@ def stats():
 def dados_frota():
     # Ensure the user reached path via GET
     if request.method == "GET":
-        return render_template("stats_dados_frota.html")
+        cars = Car.query.all()
+        ano = 0
+        preço_compra = 0 
+        preço_venda = 0
+        nb_cars = len(cars)
+        for car in cars:
+            ano = ano+int(car.manufacture_year)
+            preço_compra = preço_compra +int(car.buy_price)
+            preço_venda = preço_venda + int(car.sell_price)
+        ano_medio = 2023 - int(ano/nb_cars)
+        compra_medio = int(preço_compra/nb_cars)
+        venda_medio = int(preço_venda/nb_cars)
+
+        return render_template("stats_dados_frota.html", nb_cars = nb_cars, ano_medio=ano_medio, compra_medio=compra_medio, venda_medio=venda_medio)
     else:
         pass
 
@@ -192,10 +205,16 @@ def cars_update(id):
     else:
         form = request.form
         car = Car.query.filter_by(id=id).first()
-        car.plate = form["plate"]
-        car.brand = form["brand"]
-        car.model = form["model"]
-        car.manufacture_year = form["manufacture_year"]
+        if len(form["plate"]) !=0:
+            car.plate = form["plate"]
+        if len(form["brand"]) !=0:
+            car.brand = form["brand"]
+        if len(form["model"]) !=0:
+            car.model = form["model"]
+        if len(form["status"]) !=0:
+            car.status = form["status"]
+        if len(form["manufacture_year"]) !=0:
+            car.manufacture_year = form["manufacture_year"]
         db.session.commit()
         return redirect(url_for("stock_operation", crud_message="car-update"))
 
