@@ -7,10 +7,6 @@ main {
     position: relative;
 }
 
-header {
-    padding-bottom: 3rem;
-}
-
 .stock {
     border-radius: 2rem;
     background-color: var(--color-background);

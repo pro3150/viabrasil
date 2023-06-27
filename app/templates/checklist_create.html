@@ -6,41 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Via Brasil | Checklist</title>
-    <link rel="stylesheet" href="/static/css/checklist.css">
+    <link rel="stylesheet" href="/static/css/checklist_create.css">
     <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/checklist_create.js" defer></script>
 </head>
 
 <body>
     {% include 'header.html' %}
     <main>
-        <div class="checklists">
-            <div class="create-checklist">
-                <a href="{{url_for('checklist_template_create')}}">Criar template</a>
-            </div>
+        <div class="checklist_templates">
             {% if checklist_templates|length > 0 %}
-                {% for checklist_template in checklist_templates %}
-                    <div class="checklist_template">
-                        <h2>{{checklist_template["title"]}}</h2>
-                        <!-- <a href="checklist/create/{{checklist_template['id']}}">Criar checklist</a> -->
+                <form action="{{url_for('checklist_create_with_template')}}">
+                    <div class="filters">
+                        <select required="required" name="cars" id="cars">
+                            {% for car in cars %}
+                                <option value="{{car.id}}">{{car.model}} | {{car.plate}}</option>
+                            {% endfor %}
+                        </select>
+                        <select required="required" name="checklist_template" id="checklist_template">
+                            <option value="0">Selecione um template</option>
+                            {% for checklist_template in checklist_templates %}
+                                <option value="{{checklist_template.id}}">{{checklist_template.title}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    {% for checklist_item in checklist_template.checklist_template_items %}
-                        <div class="checklist-item">
-                            <p>{{checklist_item["text"]}}<p>
-                            <!-- <div class="checklist-item-content">
-                                <h3>{{checklist_item["name"]}}</h3>
-                                <p>{{checklist_item["description"]}}</p>
-                            </div> -->
-                            <!-- <div class="checklist-item-options">
-                                <a href="checklist/update/{{checklist_item['id']}}">Editar</a>
-                                <a href="checklist/delete/{{checklist_item['id']}}">Excluir</a>
-                            </div> -->
+                    <!-- {% for checklist_template in checklist_templates %}
+                        <div class="checklist_template">
+                            <div class="checklist_template_header">
+                                <img src="/static/img/car_blank.png" alt="Carro">
+                                <div class="checklist_template_header_info">
+                                    <h3 class="checklist_template_title">{{checklist_template["title"]}}</h3>
+                                    <p>AAA-0000</p>
+                                    <p>Marca</p>
+                                    <h3>Modelo do veículo</h3>
+                                    <p>Ano de fabricação</p>
+                                </div>
+                            </div>
+                            <div class="checklist_template_items">
+                                <ul>
+                                    {% for checklist_item in checklist_template.checklist_template_items %}
+                                    <li class="checklist-item">
+                                        {{checklist_item["text"]}}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                    {% endfor %}
-                {% endfor %}
+                    {% endfor %} -->
             {% else %}
-                <p>Não há templates disponíveis para criação de checklists</p>
+                </div>
+                    <p>Não há templates disponíveis para criação de checklists</p>
+                </div>
             {% endif %}
-        </div>
+                <input type="submit" value="Selecionar">
+            </form>
     </main>
     {% include 'footer.html' %}
 </body>

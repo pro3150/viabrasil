@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.engine.url import URL
 from dotenv import load_dotenv
 from models.setup import (
     db,
@@ -17,12 +18,11 @@ from werkzeug.utils import secure_filename
 import os
 
 
-load_dotenv()
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USERNAME")
-DB_PASS = os.getenv("DB_PASS")
+DB_HOST = os.environ.get("DB_HOST")
+DB_PORT = os.environ.get("DB_PORT")
+DB_NAME = os.environ.get("DB_NAME")
+DB_USER = os.environ.get("DB_USERNAME")
+DB_PASS = os.environ.get("DB_PASS")
 
 app = Flask(__name__)
 
@@ -71,7 +71,20 @@ def checklist_create():
     # Ensure the user reached path via GET
     if request.method == "GET":
         checklist_templates = ChecklistTemplate.query.all()
-        return render_template("checklist_create.html", checklist_templates=checklist_templates)
+        cars = Car.query.all()
+        return render_template("checklist_create.html", checklist_templates=checklist_templates, cars=cars)
+    else:
+        pass
+
+
+@app.route("/checklist/create/build")
+def checklist_create_with_template():
+    # Ensure the user reached path via GET
+    if request.method == "GET":
+        req = request.args
+        car_id = req.get("car_id")
+        #checklist_template = ChecklistTemplate.query.filter_by(id=checklist_template_id).first()
+        return car_id#render_template("checklist_create_with_template.html", checklist_template=checklist_template)
     else:
         pass
 
