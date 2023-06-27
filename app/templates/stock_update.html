@@ -12,9 +12,11 @@
     {% include 'header.html' %}
 
     <main>
-        <form action="{{ url_for('cars_update', id=id) }}" method="POST" >
-            <label for="image-url">Imagem</label>
-            <input type="text" name="image-url" id="image-url">
+        <form action="{{ url_for('cars_update', id=id) }}" method="POST">
+            <!-- <label for="image-url">Imagem</label>
+            <input type="text" name="image-url" id="image-url"> -->
+            <label for="image" id="image-label">Imagem</label>
+            <input type="file" name="image" id="image" accept="image/*">
             <label for="plate">Placa</label>
             <input type="text" name="plate" id="plate">
             <label for="brand">Marca</label>
@@ -23,6 +25,7 @@
             <input type="text" name="model" id="model">
             <label for="manufacture_year">Ano de fabricação</label>
             <input type="text" name="manufacture_year" id="manufacture_year">
+            <br>
             <input type="submit" value="Editar">
         </form>
     </main>

@@ -8,3 +8,15 @@ form {
 form input {
     width: 20rem;
 }
+
+
+#image {
+    display: none;
+  }
+
+#image-label {
+    font-size: 1.3em;
+    padding: 10px 15px;
+    border: 1px solid black;
+    border-radius: 4%;
+}
