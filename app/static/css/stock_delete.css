@@ -1,0 +1,23 @@
+.stock-delete {
+    border-radius: 2rem;
+    background-color: var(--color-background);
+    padding: 2rem; 
+    margin-right: 50rem;
+    margin-left: 50rem;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-button {
+    border-radius: 2rem;
+    /* background-color: var(--color-background); */
+    /* padding: 2rem; 
+    margin-right: 60rem;
+    margin-left: 60rem;
+    margin-bottom: 0px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

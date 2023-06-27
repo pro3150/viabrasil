@@ -12,7 +12,7 @@
     {% include 'header.html' %}
     <main>
         <form action="{{url_for('cars_create')}}" method="POST" enctype="multipart/form-data" >
-            <label for="image">URL da Imagem</label>
+            <label for="image" id="image-label">Imagem</label>
             <input type="file" name="image" id="image" accept="image/*">
             <label for="plate">Placa</label>
             <input type="text" name="plate" id="plate">
@@ -28,6 +28,8 @@
             <input type="text" name="sell_price" id="sell_price">
             <label for="status">Status</label>
             <input type="text" name="status" id="status" value="in_stock" readonly>
+            <br>
+            <br>
             <input type="submit" value="Cadastrar">
         </form>
     </main>
