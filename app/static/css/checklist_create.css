@@ -6,7 +6,7 @@ main {
     margin-bottom: 2rem;
 }
 
-.checklist_templates form {
+.checklist_templates {
     border-radius: 2rem;
     background-color: var(--color-background);
     padding: 2rem; 

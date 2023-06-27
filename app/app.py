@@ -70,28 +70,62 @@ def checklist():
     # Ensure the user reached path via GET
     if request.method == "GET":
         checklist_items = ChecklistItem.query.all()
+        print(checklist_items)
         return render_template("checklist.html", checklist_items=checklist_items)
     else:
         pass
 
 
-@app.route("/checklist/create")
+@app.route("/checklist/create", methods=["GET", "POST"])
 def checklist_create():
     # Ensure the user reached path via GET
     if request.method == "GET":
+        req = request.args
+        car = req.get("car")
+        checklist_template = req.get("checklist_template")
+        if car and checklist_template:
+            checklist_template = ChecklistTemplate.query.filter_by(id=checklist_template).first()
+            car = Car.query.filter_by(id=car).first()
         checklist_templates = ChecklistTemplate.query.all()
         cars = Car.query.all()
-        return render_template("checklist_create.html", checklist_templates=checklist_templates, cars=cars)
+        return render_template(
+            "checklist_create.html",
+            checklist_templates=checklist_templates,
+            checklist_template_filtered=checklist_template,
+            cars=cars,
+            car_filtered=car
+        )
     else:
-        pass
+        form = request.form
+        car_id = form['car_id']
+        checklist_template_id = form['checklist_template_id']
+
+        checklist_template = ChecklistTemplate.query.filter_by(id=checklist_template_id).first()
+        checklist_item_templates = checklist_template.checklist_template_items
+
+        checklist = Checklist(
+            checklist_template_id=checklist_template_id,
+            status="open",
+            car_id=car_id,
+        )
+        db.session.add(checklist)
+
+        for checklist_item_template in checklist_item_templates:
+            checklist_item = ChecklistItem(
+                checklist=checklist,
+                template_item_id=checklist_item_template.id,
+                status=False,
+            )
+            db.session.add(checklist_item)
+        
+        db.session.commit()
+        return redirect(url_for("checklist"))
 
 
-@app.route("/checklist/create/build")
-def checklist_create_with_template():
+@app.route("/checklist/create/build", methods=["POST"])
+def checklist_create_with_template(car_id, checklist_template_id):
     # Ensure the user reached path via GET
     if request.method == "GET":
-        req = request.args
-        car_id = req.get("car_id")
         #checklist_template = ChecklistTemplate.query.filter_by(id=checklist_template_id).first()
         return car_id#render_template("checklist_create_with_template.html", checklist_template=checklist_template)
     else:

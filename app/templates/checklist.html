@@ -17,16 +17,12 @@
             <div class="create-checklist">
                 <a href="{{url_for('checklist_create')}}">Criar checklist</a>
             </div>
-            {% if checklist_template_items|length > 0 %}
-                {% for checklist_template_items in checklist_items %}
+            {% if checklist_items|length > 0 %}
+                {% for checklist_item in checklist_items %}
                     <div class="checklist-item">
                         <div class="checklist-item-content">
-                            <h3>{{checklist_template_items["name"]}}</h3>
-                            <p>{{checklist_template_items["description"]}}</p>
-                        </div>
-                        <div class="checklist-item-options">
-                            <a href="checklist/update/{{checklist_template_items['id']}}">Editar</a>
-                            <a href="checklist/delete/{{checklist_template_items['id']}}">Excluir</a>
+                            <h3>{{checklist_item["status"]}}</h3>
+                            <p>{{checklist_item["description"]}}</p>
                         </div>
                     </div>
                 {% endfor %}
